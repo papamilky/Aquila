@@ -1,0 +1,14 @@
+keys:
+  - &milky_altair age1vnlspapy6f6vwr62l3dw02gzptqqepsvkzangvz57uhklds4ugrqk38x0n
+  - &root_altair age1l44w5kfg4r3sufqwlsn4ch295d3vldsf3svsrgtl4jev3mq0ce9s6yjz0j
+  - &root_okab age1gwjntytp984t93c3z4792wv4u2fufrsuxe7p7egdwmtc580zw95qgqxz2t
+  - &root_alshain age1myr476xgvvpd4qrleucstyczlzyxj6wllsfzcawz4m88vmwu54kq6qse76
+
+creation_rules:
+  - path_regex: Secrets/[^/]+\.(yaml)$
+    key_groups:
+    - age:
+      - *milky_altair
+      - *root_altair
+      - *root_okab
+      - *root_alshain
