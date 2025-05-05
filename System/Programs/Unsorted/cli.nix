@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs;
     [
       # Utils - Terminal
+      nh
       git-crypt
       sops
       gnupg
@@ -16,7 +17,6 @@
       imv
       ranger
       cbonsai
-      cava
       pipes
       cowsay
       neovim
@@ -41,8 +41,7 @@
       playerctl
       gowall
       wallust
-
-      kitty
+      libqalculate
     ]
     ++ [
       inputs.nixos-anywhere.packages.${pkgs.system}.nixos-anywhere

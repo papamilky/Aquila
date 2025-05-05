@@ -25,8 +25,6 @@
         }
       }
     }
-
-
   '';
 in {
   imports = [
@@ -60,22 +58,6 @@ in {
       };
     };
   };
-
-  # home.activation = {
-  #   writeContainerConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
-  #     $DRY_RUN_CMD cat > ${ConfigDir}/Caddyfile << EOF
-  #     ${firstCaddy}
-  #     ${builtins.concatStringsSep "\n" cfg.config}
-  #     EOF
-  #     $DRY_RUN_CMD cat > ${ContainerDir}/data/root.crt << EOF
-  #     ${secrets.caddy.root_cert}
-  #     EOF
-  #     $DRY_RUN_CMD cat > ${ContainerDir}/data/root.key << EOF
-  #     ${secrets.caddy.root_key}
-  #     EOF
-  #     run ${pkgs.podman}/bin/podman stop caddy
-  #   '';
-  # };
 
   home.activation = {
     writeContainerConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''

@@ -57,7 +57,12 @@
   };
 
   fileSystems."/mount/Vega" = {
-    device = "/dev/disk/by-uuid/ace89f03-2fdf-4054-a7dc-07bdbf636c92";
+    device = "/dev/disk/by-uuid/534c846c-487d-4db6-be6d-ab0d5c49b612";
+    fsType = "btrfs";
+  };
+
+  fileSystems."/mount/Deneb" = {
+    device = "/dev/disk/by-uuid/dcf862d7-fefc-4026-aa24-70531a310e16";
     fsType = "btrfs";
   };
 

@@ -34,7 +34,7 @@
       ssh = {
         enable = true;
         permittedKeys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFSAww7NDyOSaBe3E9sr3z8zjr22V3J8MwV6pUQ50t22 milky@altair"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4iSC6WdaeBss3x/NxLqj9vYB7IaGO/2aVhSh286GKi milky@altair"
         ];
       };
     };

@@ -8,6 +8,7 @@
     ./Users/milky.nix
     inputs.home-manager.nixosModules.home-manager
   ];
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
   home-manager = {
     useGlobalPkgs = true;

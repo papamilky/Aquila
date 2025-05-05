@@ -15,62 +15,70 @@
         inputs',
         pkgs,
         system,
-        quadlet-nix,
         ...
-      }: {};
+      }: {
+      };
       flake = {
         # The usual flake attributes can be defined here, including system-
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
-        # Flake-Parts Commentation
       };
     };
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mint = {
+      url = "github:trumank/mint"; # Deep Rock Galactic Mod Loader
+    };
 
-    winapps = {
-      url = "github:winapps-org/winapps";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.48.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rose-pine-hyprcursor = {
+      url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    mint.url = "github:trumank/mint"; # Deep Rock Galactic Mod Loader
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-
-    hyprland.url = "github:hyprwm/Hyprland/v0.47.1";
-    hyprspace = {
-      url = "github:KZDKM/Hyprspace/cd58d2e47b575c66c2682436ba425ccdc8462998";
-      inputs.hyprland.follows = "hyprland";
+    breeze-cursor = {
+      url = "git+https://forgejo.internal/PapaMilky/breeze-cursors";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
 
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    raf-pelican = {
-      url = "github:NotAShelf/pterodactyl.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-anywhere = {
       url = "github:nix-community/nixos-anywhere";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
     quadlet-nix = {
       url = "github:SEIAROTg/quadlet-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

@@ -12,15 +12,40 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    nix.settings = {
+      extra-substituters = [
+        "https://hyprland.cachix.org"
+        "https://walker-git.cachix.org"
+      ];
+      extra-trusted-substituters = [
+        "https://hyprland.cachix.org"
+        "https://walker-git.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
+      ];
+    };
+
     home-manager.users.milky = {
+      imports = [
+        ./uwsm.nix
+        inputs.walker.homeManagerModules.default
+      ];
+      
       home.packages =
         (with inputs; [
-          rose-pine-hyprcursor.packages.${pkgs.system}.default
+          breeze-cursor.packages.${pkgs.system}.default
           quickshell.packages."${pkgs.system}".default
         ])
         ++ (with pkgs; [
+          libqalculate
           anyrun
+
           eww
+          slurp
+          swww
+          nautilus
 
           gallery-dl
           hyprpicker
@@ -31,8 +56,45 @@ in {
         ]);
 
       nix.settings = {
-        extra-substituters = ["https://hyprland.cachix.org"];
-        extra-trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+        extra-substituters = [
+          "https://hyprland.cachix.org"
+        ];
+        extra-trusted-substituters = [
+          "https://hyprland.cachix.org"
+        ];
+        extra-trusted-public-keys = [
+          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        ];
+      };
+
+      home.uwsm.env = {
+        XCURSOR_SIZE = "24";
+        XCURSOR_PATH = "${inputs.breeze-cursor.packages.${pkgs.system}.default}/share/icons";
+        XCURSOR_THEME = "breeze5-cursor";
+      };
+
+      gtk = {
+        enable = true;
+        theme = {
+          name = "Materia-dark";
+          package = pkgs.materia-theme;
+        };
+        cursorTheme = {
+          name = "breeze5-cursor";
+          package = inputs.breeze-cursor.packages.${pkgs.system}.default;
+          size = 24;
+        };
+        iconTheme = {
+          name = "oomox-gruvbox-dark";
+          package = pkgs.gruvbox-dark-icons-gtk;
+        };
+      };
+
+      qt = {
+        enable = true;
+        platformTheme.name = "gtk";
+        style.name = "adwaita-dark";
+        style.package = pkgs.adwaita-qt;
       };
 
       home.file.".config/hypr/hyprlock.conf".text = builtins.readFile ./milky-hyprlock.conf;
@@ -41,31 +103,13 @@ in {
         enable = true;
         package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
         portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-        plugins = [];
 
         systemd.enable = false;
-        extraConfig = "
-            ###
-            ### RESIZE SUBMAP START
-            submap=resize
-            bind=,catchall,submap,reset
-            binde=,right,resizeactive,10 0
-            binde=,left,resizeactive,-10 0
-            binde=,up,resizeactive,0 -10
-            binde=,down,resizeactive,0 10
-            bind=,escape,submap,reset 
-            submap=reset
-
-            ### RESIZE SUBMAP END
-            ###
-          ";
-
         settings = {
           # Enviroment Vars
           env = [
-            "XCURSOR_SIZE,26"
-            "HYPRCURSOR_THEME,rose-pine-hyprcursor"
-            "HYPRCURSOR_SIZE,26"
+            "HYPRCURSOR_THEME,breeze5-cursor"
+            "HYPRCURSOR_SIZE,32"
           ];
 
           cursor = {
@@ -73,15 +117,12 @@ in {
             sync_gsettings_theme = true;
           };
 
-          plugin = {
-          };
-
           monitor = [
             "DP-2, 2560x1440@75, 0x0, 1"
           ];
 
           input = {
-            follow_mouse = 2;
+            follow_mouse = 0;
             sensitivity = 0;
             accel_profile = "adaptive";
           };
@@ -100,13 +141,20 @@ in {
           dwindle = {
             pseudotile = "yes";
             preserve_split = "yes";
+            force_split = 2;
           };
+
           debug = {
             disable_logs = false;
           };
 
           master = {
             new_on_top = "true";
+          };
+
+          binds = {
+            allow_workspace_cycles = true;
+            # hide_special_on_workspace_change = true;
           };
 
           decoration = {
@@ -125,13 +173,12 @@ in {
             enabled = "yes";
 
             bezier = [
-              "myBezier, 0.05, 0.9, 0.1, 1"
               "easeInOutCubic, 0.65, 0, 0.35, 1"
             ];
 
             animation = [
-              "windows, 1, 7, myBezier"
-              "windowsOut, 1, 7, default, popin 80%"
+              "windows, 1, 1, default"
+              "windowsOut, 1, 1, default, popin 80%"
               "border, 1, 10, default"
               "borderangle, 1, 8, default"
               "fade, 4, 1, default"
@@ -140,9 +187,19 @@ in {
           };
 
           windowrulev2 = [
+            "bordersize 0, floating:0, onworkspace:w[tv1]"
+            "bordersize 0, floating:0, onworkspace:f[1]"
+            "rounding 0, floating:0, onworkspace:w[tv1]"
+            "rounding 0, floating:0, onworkspace:f[1]"
             "float, initialClass:steam, initialTitle:negative:Steam"
             "float, initialClass:firefox, title:^(Extension:).*$"
-            "immediate, class:^(.*Minecraft.*)$"
+            "immediate, initialClass:^(.*Minecraft.*)$"
+          ];
+
+          workspace = [
+            "w[t1], gapsout:0, gapsin:0"
+            "w[tg1], gapsout:0, gapsin:0"
+            "f[1], gapsout:0, gapsin:0"
           ];
 
           layerrule = [
@@ -159,18 +216,21 @@ in {
             "uwsm app -- wl-paste --type text --watch cliphist store" # Stores only text data
             "uwsm app -- wl-paste --type image --watch cliphist store" # Stores only image data
 
-            "uwsm app -- swww-daemon" # Wallpaper Engine
             "uwsm app -- dunst" # Notification Server
-            "uwsm app -- quickshell -d" # Notification Server
+            "uwsm app -- quickshell -d" # Quickshell
           ];
 
           bind =
             [
+              ", SUPER_L, pass, class:^(wev)$"
               "$alt, F4, killactive,"
               "$mod, Q, killactive,"
-              ", Print, exec, uwsm app -- grimblast copy screen"
-              "SUPER, space, exec, uwsm app -- pkill anyrun || anyrun"
-              "$mod, V, exec, uwsm app -- pkill wofi || cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+
+              "SHIFT, Print, exec, grim -g \"$(slurp)\" - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of the region taken\" -t 1000" # screenshot of a region
+              ", Print, exec, grim - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of the region taken\" -t 1000" # screenshot of the whole screen
+
+              "$mod, space, exec, uwsm app -- qs ipc call Launcher toggleVisible"
+              "$mod, V, exec, uwsm app -- walker --modules clipboard"
               "$mod, E, exec, uwsm app -- nautilus"
               "$mod $alt, R, submap, resize"
               "$mod, M, exec, uwsm stop"
@@ -178,6 +238,8 @@ in {
               ", F11, fullscreen, 0"
 
               "$ctrl $alt, T, exec, uwsm app -- kitty" #
+
+              "$mod, grave, exec, qs ipc call Overview toggleVisible"
 
               # Toggle Floating
               "$mod, F, togglefloating,"
@@ -209,47 +271,8 @@ in {
               "$mod, S, togglespecialworkspace, magic"
               "$mod SHIFT, S, movetoworkspace, special:magic"
 
-              # Hyprspace
-              "$mod, B, exec, overview:toggle"
-
               # OBS
               "$mod SHIFT, F10, pass, class:^(com\.obsproject\.Studio)$"
-
-              # # HyprKool Related Conf
-              # # Switch activity
-              # "$mod, TAB, exec, hyprkool next-activity -c"
-
-              # # Move active window to a different acitvity
-              # "$mod CTRL, TAB, exec, hyprkool next-activity -c -w"
-
-              # "$mod, b, exec, hyprkool toggle-overview"
-
-              # # Relative workspace jumps
-              # "$mod, h, exec, hyprkool move-left -c"
-              # "$mod, l, exec, hyprkool move-right -c"
-              # "$mod, j, exec, hyprkool move-down -c"
-              # "$mod, k, exec, hyprkool move-up -c"
-
-              # "$mod CTRL ALT, left, exec, hyprkool move-left -c"
-              # "$mod CTRL ALT, right, exec, hyprkool move-right -c"
-              # "$mod CTRL ALT, up, exec, hyprkool move-up -c"
-              # "$mod CTRL ALT, down, exec, hyprkool move-down -c"
-
-              # # Move active window to a workspace
-              # "$mod SHIFT, h, exec, hyprkool move-left -c -w"
-              # "$mod SHIFT, l, exec, hyprkool move-right -c -w"
-              # "$mod SHIFT, j, exec, hyprkool move-down -c -w"
-              # "$mod SHIFT, k, exec, hyprkool move-up -c -w"
-
-              # "$mod CTRL ALT SHIFT, left, exec, hyprkool move-left -c -w"
-              # "$mod CTRL ALT SHIFT, right, exec, hyprkool move-right -c -w"
-              # "$mod CTRL ALT SHIFT, up, exec, hyprkool move-up -c -w"
-              # "$mod CTRL ALT SHIFT, down, exec, hyprkool move-down -c -w"
-
-              # # toggle special workspace
-              # "$mod, SPACE, exec, hyprkool toggle-special-workspace -n minimized"
-              # # move active window to special workspace without switching to that workspace
-              # "$mod, s, exec, hyprkool toggle-special-workspace -n minimized -w -s"
             ]
             ++ (
               # workspaces
@@ -259,11 +282,6 @@ in {
                   in [
                     "$mod, code:1${toString i}, workspace, ${toString ws}"
                     "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-
-                    # Hyprkool Conf
-                    # "$mod, code:1${toString i}, exec, hyprkool switch-named-focus -n ${toString ws}"
-                    # "$mod SHIFT, code:1${toString i}, exec, hyprkool switch-named-focus -n ${toString ws} -w"
-                    # "$mod CTRL, code:1${toString i}, exec, hyprkool set-named-focus -n ${toString ws}"
                   ]
                 )
                 6)
@@ -274,15 +292,15 @@ in {
           ];
           bindl = [
             # Knob
-            ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1" # Increase Volume
-            ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- -l 1" # Decrese Volume
-            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" # Mute Toggle
+            ", XF86AudioRaiseVolume, exec, qs ipc call Volume setVolume +5" # Increase Volume
+            ", XF86AudioLowerVolume, exec, qs ipc call Volume setVolume -5" # Decrese Volume
+            ", XF86AudioMute,        exec, qs ipc call Volume toggleMute" # Mute Toggle
             # FN Knob
-            ", XF86AudioPlay, exec, playerctl play-pause" # Pause Song
-            ", XF86AudioNext, exec, playerctl next" # Next Song
-            ", XF86AudioPrev, exec, playerctl previous" # Previous Song
+            ", XF86AudioPlay,        exec, qs ipc call Media  togglePause" # Pause Song
+            ", XF86AudioNext,        exec, qs ipc call Media  next" # Next Song
+            ", XF86AudioPrev,        exec, qs ipc call Media  previous" # Previous Song
             # Mic Mute
-            ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" # Toggle Microphone Mute
+            ", XF86AudioMicMute,     exec, qs ipc call Volume toggleMic" # Toggle Microphone Mute
           ];
         };
       };
@@ -295,8 +313,11 @@ in {
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
+    environment.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      QML2_IMPORT_PATH = "/home/milky/quickshell-plugins/";
+    };
+    
     environment.systemPackages = with pkgs; [
       hyprcursor
       hypridle

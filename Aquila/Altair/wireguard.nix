@@ -20,7 +20,7 @@
         netdevConfig = {
           Kind = "wireguard";
           Name = "wg0";
-          MTUBytes = "1300";
+          MTUBytes = "1500";
         };
         wireguardConfig = {
           PrivateKeyFile = config.sops.secrets."wireguard/altair_private_key".path;
@@ -46,6 +46,13 @@
       networkConfig = {
         IPMasquerade = "ipv4";
         IPv4Forwarding = true;
+      };
+    };
+
+    networks."uplink" = {
+      matchConfig.Name = "wlp13s0";
+      networkConfig = {
+        IPMasquerade = true;
       };
     };
   };

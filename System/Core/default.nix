@@ -1,7 +1,10 @@
-{...}: {
+{inputs, ...}: {
   imports = [
     ./users.nix
     ./networking.nix
+
+    inputs.sops-nix.nixosModules.sops
+    inputs.lix-module.nixosModules.default
   ];
 
   # Internationalisation
@@ -29,6 +32,12 @@
       experimental-features = ["flakes" "nix-command"];
       auto-optimise-store = true;
       trusted-users = ["root" "@wheel"];
+      extra-substituters = [
+        "https://walker.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+      ];
     };
     optimise = {
       automatic = true;

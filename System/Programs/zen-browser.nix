@@ -9,7 +9,7 @@
 in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      inputs.zen-browser.packages."${pkgs.system}".default
+      # inputs.zen-browser.packages."${pkgs.system}".default
     ];
   };
 }

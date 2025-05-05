@@ -1,12 +1,15 @@
-{secrets, ...}: {
+{
+  secrets,
+  config,
+  ...
+}: {
   sops.secrets = {
     "wireguard/alshain_private_key" = {
       owner = "systemd-network";
-      # restartUnits = ["systemd-networkd.service"];
     };
   };
 
-  wg-quick.interfaces = {
+  networking.wg-quick.interfaces = {
     wg0 = {
       address = ["10.100.0.2/24"];
       dns = ["1.1.1.1"];

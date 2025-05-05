@@ -25,7 +25,6 @@
         server
         ++ [
           ./Okab.nix
-          inputs.sops-nix.nixosModules.sops
         ];
     };
   };

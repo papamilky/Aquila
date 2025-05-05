@@ -25,7 +25,6 @@
         desktop
         ++ [
           ./Alshain.nix
-          inputs.sops-nix.nixosModules.sops
         ];
     };
   };

@@ -23,38 +23,46 @@
       userEmail = "milkyfromhr@outlook.com";
     };
 
-    programs.zsh = {
-      enable = true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-
-      plugins = [
-        {
-          name = "zsh-powerlevel10k";
-          src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
-          file = "powerlevel10k.zsh-theme";
-        }
-      ];
-
-      oh-my-zsh = {
+    programs = {
+      cava = {
         enable = true;
-        plugins = ["sudo" "git"];
+        settings = {
+          input.method = "pulse";
+          output = {
+            channels = "mono";
+            orientation = "horizontal";
+          };
+        };
       };
-      initExtraBeforeCompInit = ''
-        P10K_INSTANT_PROMPT="''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        if [[ -r "$P10K_INSTANT_PROMPT" ]]; then
-          source "$P10K_INSTANT_PROMPT"
-        fi
-        source ~/.p10k.zsh
-        bindkey "''${key[Up]}" up-line-or-search
-      '';
+      zsh = {
+        enable = true;
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+
+        plugins = [
+          {
+            name = "zsh-powerlevel10k";
+            src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
+            file = "powerlevel10k.zsh-theme";
+          }
+        ];
+
+        oh-my-zsh = {
+          enable = true;
+          plugins = ["sudo" "git"];
+        };
+        initExtraBeforeCompInit = ''
+          P10K_INSTANT_PROMPT="''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+          if [[ -r "$P10K_INSTANT_PROMPT" ]]; then
+            source "$P10K_INSTANT_PROMPT"
+          fi
+          source ~/.p10k.zsh
+          bindkey "''${key[Up]}" up-line-or-search
+        '';
+      };
     };
     home.file.".p10k.zsh".text = builtins.readFile ./configs/milky-p10k.zsh;
-
-    # Used to supply winapps with a configuration file found at
-    # System/Programs/Winapps/winapps.config into the users .config dir
-    home.file.".config/winapps/winapps.conf".text = builtins.readFile ./configs/milky-winapps.config;
 
     home.username = "milky";
     home.homeDirectory = "/home/milky";

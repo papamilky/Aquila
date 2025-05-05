@@ -17,6 +17,7 @@ in {
       [
         # The Holy Grail
         firefox
+        kitty
 
         # Programs - Userspace
         satty
@@ -39,8 +40,6 @@ in {
         helvum
         bitwarden
         nautilus
-        kicad
-        postman
         r2modman
         anki-bin
         kdePackages.filelight
@@ -50,31 +49,22 @@ in {
 
         (prismlauncher.override {
           jdks = [jdk8 jdk17 jdk23];
-          additionalLibs = [
-            nss
-            libcef
-            nspr
-            libgbm
-            glib
-            dbus
-            atk
-            cups
-            libGL
-            libpulseaudio
-            libglvnd
-            libdrm
-          ];
         })
 
         kdePackages.kdenlive
-        nicotine-plus
         motrix
+        
         obsidian
-        thunderbird
+        pandoc
 
         spotify
-        vesktop
-        angryipscanner
+        (vesktop.overrideAttrs (old: {
+          nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
+          postFixup = ''
+            ${old.postFixup or ""}
+            wrapProgramShell $out/bin/vesktop --add-flags "--use-gl=angle --use-angle=vulkan"
+          '';
+        }))
 
         # LibGL (why do I have this?)
         libGL

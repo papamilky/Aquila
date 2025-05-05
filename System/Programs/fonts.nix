@@ -33,6 +33,7 @@ in {
       meslo-lgs-nf
       roboto-mono
       roboto
+      hack-font
     ];
     fonts.fontDir.enable = true;
     fonts.enableDefaultPackages = true;

@@ -25,7 +25,6 @@
         desktop
         ++ [
           ./Altair.nix
-          inputs.sops-nix.nixosModules.sops
         ];
     };
   };
