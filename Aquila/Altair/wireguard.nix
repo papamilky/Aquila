@@ -33,7 +33,7 @@
             AllowedIPs = ["10.100.0.2"];
           } # Alshain
           {
-            PublicKey = "QyO5XatMfD2/XSSm0PY1T226JNIfzF3InD06toRSbz4=";
+            PublicKey = "cha9iRwyUz5W/LkE2g/0StmPrPMvGhnetL4xsoXiQg4=";
             AllowedIPs = ["10.100.0.3"];
           } # Sirius
         ];

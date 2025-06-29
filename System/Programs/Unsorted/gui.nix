@@ -19,6 +19,15 @@ in {
         firefox
         kitty
 
+        heroic
+        bottles
+        cinny-desktop
+        element-desktop
+        jetbrains.goland
+        jetbrains.webstorm
+
+        kdePackages.k3b
+
         # Programs - Userspace
         satty
         gimp
@@ -53,7 +62,7 @@ in {
 
         kdePackages.kdenlive
         motrix
-        
+
         obsidian
         pandoc
 
@@ -65,6 +74,9 @@ in {
             wrapProgramShell $out/bin/vesktop --add-flags "--use-gl=angle --use-angle=vulkan"
           '';
         }))
+
+        kdePackages.dolphin
+        kdePackages.ark
 
         # LibGL (why do I have this?)
         libGL

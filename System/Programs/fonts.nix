@@ -34,6 +34,7 @@ in {
       roboto-mono
       roboto
       hack-font
+      inter
     ];
     fonts.fontDir.enable = true;
     fonts.enableDefaultPackages = true;

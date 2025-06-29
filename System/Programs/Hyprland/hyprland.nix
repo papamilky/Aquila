@@ -32,7 +32,7 @@ in {
         ./uwsm.nix
         inputs.walker.homeManagerModules.default
       ];
-      
+
       home.packages =
         (with inputs; [
           breeze-cursor.packages.${pkgs.system}.default
@@ -123,8 +123,8 @@ in {
 
           input = {
             follow_mouse = 0;
-            sensitivity = 0;
-            accel_profile = "adaptive";
+            sensitivity = -0.65;
+            accel_profile = "flat";
           };
 
           general = {
@@ -191,9 +191,13 @@ in {
             "bordersize 0, floating:0, onworkspace:f[1]"
             "rounding 0, floating:0, onworkspace:w[tv1]"
             "rounding 0, floating:0, onworkspace:f[1]"
+
             "float, initialClass:steam, initialTitle:negative:Steam"
-            "float, initialClass:firefox, title:^(Extension:).*$"
+            "float, initialClass:firefox, initialTitle:^(Extension:).*$"
             "immediate, initialClass:^(.*Minecraft.*)$"
+            "renderunfocused, initialClass:^(.*Minecraft.*)$"
+            "immediate, initialClass:^(steam_app*)$"
+            "renderunfocused, initialClass:^(steam_app*)$"
           ];
 
           workspace = [
@@ -203,8 +207,8 @@ in {
           ];
 
           layerrule = [
-            "blur, quickshell"
-            "ignorezero, quickshell"
+            # "blur, quickshell"
+            # "ignorezero, quickshell"
           ];
 
           # Let Mod be the Super key (Windows key)
@@ -229,7 +233,7 @@ in {
               "SHIFT, Print, exec, grim -g \"$(slurp)\" - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of the region taken\" -t 1000" # screenshot of a region
               ", Print, exec, grim - | wl-copy && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | dunstify \"Screenshot of the region taken\" -t 1000" # screenshot of the whole screen
 
-              "$mod, space, exec, uwsm app -- qs ipc call Launcher toggleVisible"
+              "$mod, space, exec, qs ipc call ControlCenter toggleLauncherVisible"
               "$mod, V, exec, uwsm app -- walker --modules clipboard"
               "$mod, E, exec, uwsm app -- nautilus"
               "$mod $alt, R, submap, resize"
@@ -317,7 +321,7 @@ in {
       NIXOS_OZONE_WL = "1";
       QML2_IMPORT_PATH = "/home/milky/quickshell-plugins/";
     };
-    
+
     environment.systemPackages = with pkgs; [
       hyprcursor
       hypridle

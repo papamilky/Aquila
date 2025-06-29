@@ -1,0 +1,67 @@
+[ERROR][2025-05-29 23:32:29][shared_folder.py:100] - waydroid-monitor.service or waydroid-monitor.service not exists!
+[INFO][2025-05-29 23:32:30][extensions_manager.py:144] - extension json has been updated
+[INFO][2025-05-29 23:57:55][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/ndk_translation-chromeos_guybrush/EXTENSION
+[INFO][2025-05-29 23:57:55][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/ndk_translation-chromeos_guybrush/prop.json
+[INFO][2025-05-29 23:57:57][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/ndk_translation-chromeos_guybrush/ndk_translation-chromeos_guybrush-R119-15633.69.0.zip
+[ERROR][2025-05-29 23:57:57][available_version_page.py:294] - Command failed with return code 127: /nix/store/jyaqqfhw5vs8g88bc4zahrcjhjhry60k-waydroid-helper-0.1.2/bin/waydroid-cli: line 80: fakeroot: command not found
+
+[INFO][2025-05-29 23:58:10][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/houdini-chromeos_brya/houdini.rc
+[INFO][2025-05-29 23:58:10][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/houdini-chromeos_brya/EXTENSION
+[INFO][2025-05-29 23:58:10][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/houdini-chromeos_brya/prop.json
+[INFO][2025-05-29 23:58:24][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/houdini-chromeos_brya/houdini-chromeos_brya-38795.zip
+[ERROR][2025-05-29 23:58:24][available_version_page.py:294] - Command failed with return code 127: /nix/store/jyaqqfhw5vs8g88bc4zahrcjhjhry60k-waydroid-helper-0.1.2/bin/waydroid-cli: line 80: fakeroot: command not found
+
+[INFO][2025-05-29 23:58:34][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/magisk-delta.install
+[INFO][2025-05-29 23:58:34][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/EXTENSION
+[INFO][2025-05-29 23:58:34][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/bootanim.rc
+[INFO][2025-05-29 23:58:42][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/magisk-delta-27001-R6687BB53.apk
+[ERROR][2025-05-29 23:58:42][available_version_page.py:294] - Command failed with return code 127: /nix/store/jyaqqfhw5vs8g88bc4zahrcjhjhry60k-waydroid-helper-0.1.2/bin/waydroid-cli: line 80: fakeroot: command not found
+
+[INFO][2025-05-29 23:59:40][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-29 23:59:48][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-29 23:59:56][main.py:90] - app.preferences action activated
+[INFO][2025-05-29 23:59:59][main.py:90] - app.preferences action activated
+[INFO][2025-05-30 00:02:40][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/magisk-delta.install
+[INFO][2025-05-30 00:02:40][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/bootanim.rc
+[INFO][2025-05-30 00:02:40][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/EXTENSION
+[ERROR][2025-05-30 00:02:40][available_version_page.py:294] - Command failed with return code 127: /home/milky/.cache/waydroid-helper/extensions/magisk-delta/EXTENSION: line 39: unzip: command not found
+
+[INFO][2025-05-30 00:03:32][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/magisk-delta.install
+[INFO][2025-05-30 00:03:32][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/EXTENSION
+[INFO][2025-05-30 00:03:32][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/bootanim.rc
+[ERROR][2025-05-30 00:03:33][extensions_manager.py:507] - Unsupported function or invalid arguments: rm_apk
+[INFO][2025-05-30 00:03:37][extensions_manager.py:471] - Package magisk-delta installed successfully.
+[INFO][2025-05-30 00:03:45][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/ndk_translation-chromeos_guybrush/prop.json
+[INFO][2025-05-30 00:03:45][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/ndk_translation-chromeos_guybrush/EXTENSION
+[INFO][2025-05-30 00:03:47][extensions_manager.py:471] - Package ndk_translation-chromeos_guybrush installed successfully.
+[INFO][2025-05-30 00:13:44][extensions_manager.py:144] - extension json has been updated
+[INFO][2025-05-30 00:13:51][general_page.py:146] - sudo waydroid upgrade -o
+[INFO][2025-05-30 00:33:33][general_page.py:146] - sudo waydroid upgrade -o
+[INFO][2025-05-30 00:37:34][general_page.py:117] - waydroid session start
+[INFO][2025-05-30 00:37:41][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-30 01:31:42][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-30 01:33:53][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-30 01:34:34][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-30 01:35:01][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-30 01:35:36][general_page.py:146] - sudo waydroid upgrade -o
+[INFO][2025-05-30 01:35:59][general_page.py:117] - waydroid session start
+[ERROR][2025-05-30 01:52:57][shared_folder.py:100] - waydroid-monitor.service or waydroid-monitor.service not exists!
+[INFO][2025-05-30 01:53:07][extensions_manager.py:603] - Package magisk-delta removed successfully.
+[INFO][2025-05-30 01:53:19][extensions_manager.py:603] - Package ndk_translation-chromeos_guybrush removed successfully.
+[INFO][2025-05-30 01:53:24][general_page.py:134] - waydroid show-full-ui
+[ERROR][2025-05-30 13:11:45][shared_folder.py:100] - waydroid-monitor.service or waydroid-monitor.service not exists!
+[INFO][2025-05-30 13:12:04][general_page.py:129] - waydroid session stop
+[INFO][2025-05-30 13:12:05][general_page.py:117] - waydroid session start
+[INFO][2025-05-30 13:12:08][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-30 13:12:28][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/magisk-delta.install
+[INFO][2025-05-30 13:12:28][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/EXTENSION
+[INFO][2025-05-30 13:12:28][extensions_manager.py:311] - File downloaded and saved to /home/milky/.cache/waydroid-helper/extensions/magisk-delta/bootanim.rc
+[INFO][2025-05-30 13:12:32][extensions_manager.py:471] - Package magisk-delta installed successfully.
+[INFO][2025-05-30 13:12:44][extensions_manager.py:144] - extension json has been updated
+[INFO][2025-05-30 13:12:54][general_page.py:129] - waydroid session stop
+[INFO][2025-05-30 13:12:56][general_page.py:117] - waydroid session start
+[INFO][2025-05-30 13:13:00][general_page.py:134] - waydroid show-full-ui
+[INFO][2025-05-30 13:13:22][general_page.py:146] - sudo waydroid upgrade -o
+[ERROR][2025-05-30 13:27:53][shared_folder.py:100] - waydroid-monitor.service or waydroid-monitor.service not exists!
+[INFO][2025-05-30 13:28:28][extensions_manager.py:144] - extension json has been updated
+[INFO][2025-05-30 13:28:57][general_page.py:146] - sudo waydroid upgrade -o

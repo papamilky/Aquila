@@ -62,8 +62,8 @@ in {
       table ip nat {
           chain PREROUTING {
               type nat hook prerouting priority dstnat; policy accept;
-              tcp dport 80 dnat to :8000
-              tcp dport 443 dnat to :8001
+              ip saddr 192.168.1.0/24 tcp dport 80 dnat to :8000
+              ip saddr 192.168.1.0/24 tcp dport 443 dnat to :8001
           }
 
           chain OUTPUT {

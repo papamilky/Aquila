@@ -12,25 +12,59 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
+  boot.initrd.availableKernelModules = [
+    "vfio-pci"
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd" "v4l2loopback"];
+  boot.kernelModules = [
+    "kvmfr"
+    "vfio-pci"
+    "vfio"
+    "vfio_iommu_type1"
+    "vfio_virqfd"
+    "kvm-amd"
+    "v4l2loopback"
+  ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
+    kvmfr
   ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    options vfio-pci ids=1002:164e,1002:1640
+    options vfio_iommu_type1 allow_unsafe_interrupts=1
+    options kvm_amd nested=1
+    options kvmfr static_size_mb=64
   '';
+
+  services.udev.extraRules = ''
+    KERNEL=="kvmfr*", MODE="0660", GROUP="kvm", OWNER="milky"
+  '';
+
   security.polkit.enable = true;
 
   boot.kernelParams = [
     "quiet"
     "splash"
+    "amd_iommu=on"
+    "iommu=pt"
+    "vfio-pci.ids=1002:164e,1002:1640"
   ];
 
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "performance";
+  };
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   fileSystems."/" = {
@@ -63,6 +97,11 @@
 
   fileSystems."/mount/Deneb" = {
     device = "/dev/disk/by-uuid/dcf862d7-fefc-4026-aa24-70531a310e16";
+    fsType = "btrfs";
+  };
+
+  fileSystems."/mount/VM" = {
+    device = "/dev/disk/by-uuid/e155b7bf-82bb-4a5e-8d12-61262db0f340";
     fsType = "btrfs";
   };
 

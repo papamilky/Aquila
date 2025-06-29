@@ -8,7 +8,7 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "milky";
-    extraGroups = ["networkmanager" "wheel" "cdrom"];
+    extraGroups = ["networkmanager" "wheel" "cdrom" "cdrom"];
   };
 
   hardware.keyboard.qmk.enable = true;
@@ -67,10 +67,6 @@
     home.username = "milky";
     home.homeDirectory = "/home/milky";
     home.stateVersion = "23.11";
-
-    home.sessionVariables = {
-      QML2_IMPORT_PATH = "${pkgs.kdePackages.kirigami}/lib/qt-5.15.16/qml:$QML2_IMPORT_PATH";
-    };
 
     home.packages = with pkgs; [
       ## Shell

@@ -33,5 +33,11 @@
 
     # Hyprland - Pretty (cool?) Compositor
     ./Hyprland/hyprland.nix
+
+    # Moonlight
+    ./Discord
+
+    # Vintage Story
+    ./vintagestory.nix
   ];
 }

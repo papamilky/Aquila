@@ -6,9 +6,10 @@
   flake.nixosConfigurations = let
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
+    mod = "${self}/System";
 
     # get the basic config to build on top of
-    inherit (import "${self}/System") desktop;
+    inherit (import "${mod}") server;
     inherit (import "${self}/Modules") blocks;
 
     # get plaintext "secrets"
@@ -19,13 +20,13 @@
       inherit inputs self secrets;
     };
   in {
-    altair = nixosSystem {
+    deneb = nixosSystem {
       inherit specialArgs;
       modules =
-        desktop
+        server
         ++ blocks
         ++ [
-          ./Altair.nix
+          ./Deneb.nix
         ];
     };
   };

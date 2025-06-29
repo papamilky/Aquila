@@ -7,6 +7,7 @@
         ./Aquila/Altair
         ./Aquila/Alshain
         ./Aquila/Okab
+        ./Aquila/Deneb
       ];
       systems = ["x86_64-linux" "aarch64-linux"];
       perSystem = {
@@ -66,7 +67,6 @@
     };
     quadlet-nix = {
       url = "github:SEIAROTg/quadlet-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -78,6 +78,20 @@
     };
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    tree-sitter-odin = {
+      url = "github:tree-sitter-grammars/tree-sitter-odin";
+      flake = false;
+    };
+    odin-ts-mode = {
+      url = "github:Sampie159/odin-ts-mode";
+      flake = false;
+    };
+
+    moonlight = {
+      url = "github:moonlight-mod/moonlight";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

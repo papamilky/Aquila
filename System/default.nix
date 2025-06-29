@@ -7,6 +7,8 @@ let
     ./Services/ssh.nix
     ./Services/sops.nix
     ./Services/bluetooth.nix
+    ./Services/solaar.nix
+    ./Services/navidrome.nix
 
     ./Core
 
