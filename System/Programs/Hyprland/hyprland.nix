@@ -101,7 +101,11 @@ in {
 
       wayland.windowManager.hyprland = {
         enable = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (old: {
+          patches = (old.patches or []) ++ [
+            ./patch.txt
+          ];
+        });
         portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
         systemd.enable = false;
@@ -130,7 +134,7 @@ in {
           general = {
             layout = "dwindle";
             gaps_in = 3;
-            gaps_out = 6;
+            gaps_out = 7;
             border_size = 0;
             allow_tearing = true;
             "col.inactive_border" = "rgba(595959aa)";
@@ -200,17 +204,6 @@ in {
             "renderunfocused, initialClass:^(steam_app*)$"
           ];
 
-          workspace = [
-            "w[t1], gapsout:0, gapsin:0"
-            "w[tg1], gapsout:0, gapsin:0"
-            "f[1], gapsout:0, gapsin:0"
-          ];
-
-          layerrule = [
-            # "blur, quickshell"
-            # "ignorezero, quickshell"
-          ];
-
           # Let Mod be the Super key (Windows key)
           "$mod" = "SUPER";
           "$alt" = "ALT";
@@ -243,7 +236,7 @@ in {
 
               "$ctrl $alt, T, exec, uwsm app -- kitty" #
 
-              "$mod, grave, exec, qs ipc call Overview toggleVisible"
+              "$mod, grave, exec, qs ipc call ControlCenter toggleMixerVisible"
 
               # Toggle Floating
               "$mod, F, togglefloating,"
@@ -303,9 +296,82 @@ in {
             ", XF86AudioPlay,        exec, qs ipc call Media  togglePause" # Pause Song
             ", XF86AudioNext,        exec, qs ipc call Media  next" # Next Song
             ", XF86AudioPrev,        exec, qs ipc call Media  previous" # Previous Song
+            # SUPER Knob
+            "$mod, XF86AudioRaiseVolume,        exec, qs ipc call Brightness setBrightness +5" # Pause Song
+            "$mod, XF86AudioLowerVolume,        exec, qs ipc call Brightness setBrightness -5" # Next Song
             # Mic Mute
             ", XF86AudioMicMute,     exec, qs ipc call Volume toggleMic" # Toggle Microphone Mute
           ];
+
+          # bindn = (
+          #   let
+          #     keybindsFromList = keys:
+          #       builtins.concatLists (
+          #         builtins.map (key: [
+          #           ", ${key}, exec, notify-desktop ${key}"
+          #           "SHIFT, ${key}, exec, notify-desktop ${key}"
+          #         ])
+          #         keys
+          #       );
+          #   in
+          #     keybindsFromList [
+          #       # letters
+          #       "a"
+          #       "b"
+          #       "c"
+          #       "d"
+          #       "e"
+          #       "f"
+          #       "g"
+          #       "h"
+          #       "i"
+          #       "j"
+          #       "k"
+          #       "l"
+          #       "m"
+          #       "n"
+          #       "o"
+          #       "p"
+          #       "q"
+          #       "r"
+          #       "s"
+          #       "t"
+          #       "u"
+          #       "v"
+          #       "w"
+          #       "x"
+          #       "y"
+          #       "z"
+
+          #       # numbers
+          #       "1"
+          #       "2"
+          #       "3"
+          #       "4"
+          #       "5"
+          #       "6"
+          #       "7"
+          #       "8"
+          #       "9"
+          #       "0"
+
+          #       # symbols (commonly usable in keybindings)
+          #       "minus"
+          #       "equal"
+          #       "bracketleft"
+          #       "bracketright"
+          #       "semicolon"
+          #       "apostrophe"
+          #       "comma"
+          #       "period"
+          #       "slash"
+          #       "backslash"
+          #       "grave"
+
+          #       # extra
+          #       "esc"
+          #     ]
+          # );
         };
       };
     };
@@ -314,7 +380,11 @@ in {
       enable = true;
       xwayland.enable = true;
       withUWSM = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (old: {
+          patches = (old.patches or []) ++ [
+            ./patch.txt
+          ];
+        });
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
     environment.sessionVariables = {

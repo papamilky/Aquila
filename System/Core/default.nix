@@ -4,7 +4,7 @@
     ./networking.nix
 
     inputs.sops-nix.nixosModules.sops
-    inputs.lix-module.nixosModules.default
+    # inputs.lix-module.nixosModules.default
   ];
 
   # Internationalisation

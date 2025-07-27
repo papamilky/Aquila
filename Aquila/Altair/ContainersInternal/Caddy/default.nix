@@ -93,6 +93,9 @@ in {
         localhost {
           respond "Hello, world!"
 
+          @link path /link
+          redir @link https://llod.viucdn.com/6002f264d87ee.mp4?token=fMKK5zOmqFHtJlmdLJ_y5w&expires=1753086217 302
+
           tls {
             issuer internal {
               ca Caddy

@@ -6,6 +6,9 @@
   ...
 }: let
   cfg = config.aquila.system.programs.gui;
+  goland = (pkgs.jetbrains.goland.override { jdk = pkgs.jdk21; });
+  idea = (pkgs.jetbrains.idea-ultimate.override { jdk = pkgs.jdk21; });
+
 in {
   options.aquila.system.programs = {
     gui = {
@@ -23,10 +26,10 @@ in {
         bottles
         cinny-desktop
         element-desktop
-        jetbrains.goland
-        jetbrains.webstorm
 
         kdePackages.k3b
+        pulseaudio
+        ddcutil
 
         # Programs - Userspace
         satty
@@ -84,6 +87,8 @@ in {
         xorg.libX11
       ]
       ++ [
+        goland
+        idea
         inputs.mint.packages.${pkgs.system}.mint
       ];
   };

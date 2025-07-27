@@ -1,0 +1,27 @@
+diff --git a/src/xwayland/XWM.cpp b/src/xwayland/XWM.cpp
+index 3b217bc3..1171c6ce 100644
+--- a/src/xwayland/XWM.cpp
++++ b/src/xwayland/XWM.cpp
+@@ -1246,8 +1246,11 @@ void CXWM::setClipboardToWayland(SXSelection& sel) {
+ }
+ 
+ static int writeDataSource(int fd, uint32_t mask, void* data) {
+-    auto selection = (SXSelection*)data;
+-    return selection->onWrite();
++    auto transfer = (SXTransfer*)data;
++    auto ret      = transfer->selection.onWrite();
++    if (ret != 1)
++        std::erase_if(transfer->selection.transfers, [transfer](const auto& e) { return e.get() == transfer; });
++    return ret;
+ }
+ 
+ void CXWM::getTransferData(SXSelection& sel) {
+@@ -1299,7 +1302,7 @@ void CXWM::getTransferData(SXSelection& sel) {
+     if (updatedTransfer->eventSource && updatedTransfer->wlFD.get() == -1)
+         return;
+ 
+-    updatedTransfer->eventSource = wl_event_loop_add_fd(g_pCompositor->m_wlEventLoop, updatedTransfer->wlFD.get(), WL_EVENT_WRITABLE, ::writeDataSource, &sel);
++    updatedTransfer->eventSource = wl_event_loop_add_fd(g_pCompositor->m_wlEventLoop, updatedTransfer->wlFD.get(), WL_EVENT_WRITABLE, ::writeDataSource, updatedTransfer.get());
+ }
+ 
+ void CXWM::setCursor(unsigned char* pixData, uint32_t stride, const Vector2D& size, const Vector2D& hotspot) {

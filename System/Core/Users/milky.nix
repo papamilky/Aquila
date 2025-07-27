@@ -8,7 +8,8 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "milky";
-    extraGroups = ["networkmanager" "wheel" "cdrom" "cdrom"];
+    extraGroups = ["networkmanager" "wheel" "cdrom" "cdrom" "i2c"];
+    linger = true;
   };
 
   hardware.keyboard.qmk.enable = true;

@@ -30,10 +30,13 @@
     "vfio_virqfd"
     "kvm-amd"
     "v4l2loopback"
+    "i2c-dev"
+    "ddcci_backlight"
   ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
     kvmfr
+    ddcci-driver
   ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
@@ -45,7 +48,9 @@
 
   services.udev.extraRules = ''
     KERNEL=="kvmfr*", MODE="0660", GROUP="kvm", OWNER="milky"
+    KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
   '';
+  users.groups.i2c = {};
 
   security.polkit.enable = true;
 

@@ -18,6 +18,8 @@
       "lidarr.internal"
       "slskd.internal"
       "navi.internal"
+
+      "jellyfin.internal"
     ];
   };
 

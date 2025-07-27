@@ -36,7 +36,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mint = {
-      url = "github:trumank/mint"; # Deep Rock Galactic Mod Loader
+      url = "github:trumank/mint/f4b7bcd3fd216a78cfb87bd88b961bc899521f78"; # Deep Rock Galactic Mod Loader
     };
 
     zen-browser = {
@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.48.1";
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rose-pine-hyprcursor = {
