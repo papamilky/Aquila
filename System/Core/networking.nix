@@ -3,7 +3,7 @@
   services.dnsmasq.enable = false;
   networking = {
     networkmanager.enable = true;
-    nameservers = ["1.1.1.1" "1.0.0.1"];
+    nameservers = ["192.168.1.48"];
   };
 
   networking = {
@@ -20,6 +20,8 @@
       "navi.internal"
 
       "jellyfin.internal"
+      "sonarr.internal"
+      "nzbdav.internal"
     ];
   };
 

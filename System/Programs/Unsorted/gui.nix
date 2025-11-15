@@ -6,9 +6,10 @@
   ...
 }: let
   cfg = config.aquila.system.programs.gui;
-  goland = (pkgs.jetbrains.goland.override { jdk = pkgs.jdk21; });
-  idea = (pkgs.jetbrains.idea-ultimate.override { jdk = pkgs.jdk21; });
-
+  goland = pkgs.jetbrains.goland; #.override {jdk = pkgs.jdk21;};
+  idea = pkgs.jetbrains.idea-ultimate; #.override {jdk = pkgs.jdk21;};
+  clion = pkgs.jetbrains.clion; #.override {jdk = pkgs.jdk21;};
+  rustrover = pkgs.jetbrains.rust-rover; #.override {jdk = pkgs.jdk21;};
 in {
   options.aquila.system.programs = {
     gui = {
@@ -20,12 +21,11 @@ in {
       [
         # The Holy Grail
         firefox
-        kitty
 
         heroic
         bottles
-        cinny-desktop
-        element-desktop
+        # cinny-desktop # Depends on libsoup 2.74.3 (insecure dependancy)
+        # element-desktop # Deps Depend on "Jitsi-Meet" (insecure dependancy)
 
         kdePackages.k3b
         pulseaudio
@@ -35,13 +35,11 @@ in {
         satty
         gimp
         vscode
-        wlogout
+
         vlc
         mpv
         qalculate-qt
-        wofi
         kdePackages.kate
-        rofi-wayland
 
         libreoffice-still
         hunspell
@@ -50,17 +48,16 @@ in {
         swww
         flameshot
         helvum
-        bitwarden
+        bitwarden-desktop
         nautilus
         r2modman
-        anki-bin
         kdePackages.filelight
         fluent-reader
-        rpi-imager
+        # rpi-imager
         obs-studio
 
         (prismlauncher.override {
-          jdks = [jdk8 jdk17 jdk23];
+          jdks = [jdk8 jdk17 jdk25];
         })
 
         kdePackages.kdenlive
@@ -85,11 +82,16 @@ in {
         libGL
         wayland
         xorg.libX11
+
+        rustup
       ]
       ++ [
         goland
+        rustrover
         idea
-        inputs.mint.packages.${pkgs.system}.mint
+        clion
+        inputs.mint.packages.${pkgs.stdenv.hostPlatform.system}.mint
+        inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default
       ];
   };
 }

@@ -95,11 +95,18 @@ in {
               '';
             }
 
-            # Forgejo
+            # Vintage Story
             {
               subdomain = "vintage";
               address = altair;
               port = 42420;
+            }
+
+            # Vaultwarden
+            {
+              subdomain = "thevault";
+              address = altair;
+              port = 8080;
             }
           ];
 

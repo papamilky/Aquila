@@ -34,8 +34,8 @@
     # Hyprland - Pretty (cool?) Compositor
     ./Hyprland/hyprland.nix
 
-    # Moonlight
-    ./Discord
+    # Mangowc
+    ./Mangowc
 
     # Vintage Story
     ./vintagestory.nix

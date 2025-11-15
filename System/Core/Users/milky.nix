@@ -18,13 +18,14 @@
   ];
 
   home-manager.users.milky = {...}: {
-    programs.git = {
-      enable = true;
-      userName = "PapaMilky";
-      userEmail = "milkyfromhr@outlook.com";
-    };
-
     programs = {
+      git = {
+        enable = true;
+        settings.user = {
+          name = "PapaMilky";
+          email = "milkyfromhr@outlook.com";
+        };
+      };
       cava = {
         enable = true;
         settings = {
@@ -53,7 +54,7 @@
           enable = true;
           plugins = ["sudo" "git"];
         };
-        initExtraBeforeCompInit = ''
+        initContent = ''
           P10K_INSTANT_PROMPT="''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
           if [[ -r "$P10K_INSTANT_PROMPT" ]]; then
             source "$P10K_INSTANT_PROMPT"

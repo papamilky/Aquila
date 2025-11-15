@@ -27,4 +27,21 @@
       };
     };
   };
+
+  networking.firewall.allowedTCPPorts = [53];
+  networking.firewall.allowedUDPPorts = [53];
+  services.coredns = {
+    enable = true;
+    config = ''
+      . {
+        forward . 1.1.1.1 9.9.9.9
+        hosts {
+          192.168.1.144 jelly.lan
+          192.168.1.144 nzbdav.lan
+          fallthrough
+        }
+        cache 30
+      }
+    '';
+  };
 }

@@ -10,20 +10,6 @@
         ./Aquila/Deneb
       ];
       systems = ["x86_64-linux" "aarch64-linux"];
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        ...
-      }: {
-      };
-      flake = {
-        # The usual flake attributes can be defined here, including system-
-        # agnostic ones like nixosModule and system-enumerating ones, although
-        # those are more easily expressed in perSystem.
-      };
     };
 
   inputs = {
@@ -36,25 +22,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mint = {
-      url = "github:trumank/mint/f4b7bcd3fd216a78cfb87bd88b961bc899521f78"; # Deep Rock Galactic Mod Loader
+      url = "github:trumank/mint"; # Deep Rock Galactic Mod Loader
     };
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rose-pine-hyprcursor = {
-      url = "github:ndom91/rose-pine-hyprcursor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     breeze-cursor = {
-      url = "git+https://forgejo.internal/PapaMilky/breeze-cursors";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+https://git.drinkmymilk.org/PapaMilky/breeze-cursors";
     };
 
     quickshell = {
@@ -90,8 +71,8 @@
       flake = false;
     };
 
-    moonlight = {
-      url = "github:moonlight-mod/moonlight";
+    mango = {
+      url = "github:DreamMaoMao/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

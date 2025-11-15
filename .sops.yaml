@@ -4,6 +4,7 @@ keys:
   - &root_okab age1gwjntytp984t93c3z4792wv4u2fufrsuxe7p7egdwmtc580zw95qgqxz2t
   - &root_alshain age1myr476xgvvpd4qrleucstyczlzyxj6wllsfzcawz4m88vmwu54kq6qse76
   - &root_deneb age1hkvt6x68tn27qny4xu8ngczae8trjm2p5vlt8lxa3qak8suvzy6qjtyv6p
+  - &root_tarazed age1ge7k475chady2uuz52tdcalw7f55gxl5j6qtf9qpswtxze34rvtq6m5xt5
 
 creation_rules:
   - path_regex: Secrets/[^/]+\.(yaml)$
@@ -14,3 +15,4 @@ creation_rules:
       - *root_okab
       - *root_alshain
       - *root_deneb
+      - *root_tarazed

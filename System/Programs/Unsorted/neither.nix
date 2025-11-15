@@ -25,4 +25,10 @@
     libGL
     virtiofsd
   ];
+
+  # nixpkgs.overlays = [
+  #   (final: prev: {
+  #     jitsi-meet = prev.emptyFile; # or some dummy replacement
+  #   })
+  # ];
 }

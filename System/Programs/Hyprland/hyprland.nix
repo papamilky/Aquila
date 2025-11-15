@@ -35,8 +35,8 @@ in {
 
       home.packages =
         (with inputs; [
-          breeze-cursor.packages.${pkgs.system}.default
-          quickshell.packages."${pkgs.system}".default
+          breeze-cursor.packages.${pkgs.stdenv.hostPlatform.system}.default
+          quickshell.packages."${pkgs.stdenv.hostPlatform.system}".default
         ])
         ++ (with pkgs; [
           libqalculate
@@ -69,7 +69,7 @@ in {
 
       home.uwsm.env = {
         XCURSOR_SIZE = "24";
-        XCURSOR_PATH = "${inputs.breeze-cursor.packages.${pkgs.system}.default}/share/icons";
+        XCURSOR_PATH = "${inputs.breeze-cursor.packages.${pkgs.stdenv.hostPlatform.system}.default}/share/icons";
         XCURSOR_THEME = "breeze5-cursor";
       };
 
@@ -81,7 +81,7 @@ in {
         };
         cursorTheme = {
           name = "breeze5-cursor";
-          package = inputs.breeze-cursor.packages.${pkgs.system}.default;
+          package = inputs.breeze-cursor.packages.${pkgs.stdenv.hostPlatform.system}.default;
           size = 24;
         };
         iconTheme = {
@@ -101,11 +101,7 @@ in {
 
       wayland.windowManager.hyprland = {
         enable = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (old: {
-          patches = (old.patches or []) ++ [
-            ./patch.txt
-          ];
-        });
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
         portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
         systemd.enable = false;
@@ -149,7 +145,7 @@ in {
           };
 
           debug = {
-            disable_logs = false;
+            disable_logs = true;
           };
 
           master = {
@@ -230,7 +226,7 @@ in {
               "$mod, V, exec, uwsm app -- walker --modules clipboard"
               "$mod, E, exec, uwsm app -- nautilus"
               "$mod $alt, R, submap, resize"
-              "$mod, M, exec, uwsm stop"
+              # "$mod, M, exec, uwsm stop"
 
               ", F11, fullscreen, 0"
 
@@ -267,6 +263,11 @@ in {
               # Special Workspace
               "$mod, S, togglespecialworkspace, magic"
               "$mod SHIFT, S, movetoworkspace, special:magic"
+
+              "$mod, A, togglespecialworkspace, magicA"
+              "$mod SHIFT, A, movetoworkspace, special:magicA"
+              "$mod, D, togglespecialworkspace, magicD"
+              "$mod SHIFT, D, movetoworkspace, special:magicD"
 
               # OBS
               "$mod SHIFT, F10, pass, class:^(com\.obsproject\.Studio)$"
@@ -380,11 +381,7 @@ in {
       enable = true;
       xwayland.enable = true;
       withUWSM = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (old: {
-          patches = (old.patches or []) ++ [
-            ./patch.txt
-          ];
-        });
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
     environment.sessionVariables = {

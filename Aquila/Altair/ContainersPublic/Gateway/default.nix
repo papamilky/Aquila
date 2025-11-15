@@ -58,6 +58,13 @@
               proto = "udp";
               sourcePort = 42420;
             }
+
+            # vaultwarden
+            {
+              destination = "${deployment.containerHostIp "vaultwarden"}:8080";
+              proto = "tcp";
+              sourcePort = 8080;
+            }
           ];
         };
 

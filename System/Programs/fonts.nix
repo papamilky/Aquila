@@ -14,7 +14,7 @@ in {
       font-awesome
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       liberation_ttf
       material-icons
       material-design-icons
@@ -25,11 +25,10 @@ in {
       dina-font
       proggyfonts
       corefonts
-      vistafonts
+      vista-fonts
       source-han-sans
       open-sans
-      source-han-sans-japanese
-      source-han-serif-japanese
+      source-han-serif
       meslo-lgs-nf
       roboto-mono
       roboto

@@ -6,6 +6,9 @@
   environment.systemPackages = with pkgs;
     [
       # Utils - Terminal
+      zellij
+      kitty
+
       nh
       git-crypt
       sops
@@ -44,6 +47,6 @@
       libqalculate
     ]
     ++ [
-      inputs.nixos-anywhere.packages.${pkgs.system}.nixos-anywhere
+      inputs.nixos-anywhere.packages.${pkgs.stdenv.hostPlatform.system}.nixos-anywhere
     ];
 }
