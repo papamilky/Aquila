@@ -1,11 +1,20 @@
-{inputs, ...}: {
+{
+  inputs,
+  sops,
+  self,
+  ...
+}: {
   imports = [
-    ./users.nix
     ./networking.nix
 
     inputs.sops-nix.nixosModules.sops
-    # inputs.lix-module.nixosModules.default
   ];
+
+  sops.age.sshKeyPaths = [
+    "/etc/ssh/ssh_host_ed25519_key" # All Hosts Should Have SSH Keys
+  ];
+
+  sops.defaultSopsFile = "${self}/Secrets/Secrets.yaml";
 
   # Internationalisation
   i18n.defaultLocale = "en_AU.UTF-8";
@@ -33,18 +42,18 @@
       auto-optimise-store = true;
       trusted-users = ["root" "@wheel"];
       extra-substituters = [
-        "https://walker.cachix.org"
+        # this is where non-specific extra caches would go.
+        # you should prefer a System/Programs entry ahead of defining the cache globally.
       ];
       extra-trusted-public-keys = [
-        "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+        # this is where non-specific extra cache keys would go.
+        # you should prefer a System/Programs entry ahead of defining the cache globally.
       ];
     };
     optimise = {
       automatic = true;
       dates = ["03:45"];
     };
+    registry.nixpkgs.flake = inputs.nixpkgs;
   };
-
-  # DO NOT TOUCH!
-  system.stateVersion = "23.11"; # Did you read the comment? DO NOT TOUCH!
 }

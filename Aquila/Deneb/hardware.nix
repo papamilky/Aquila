@@ -5,6 +5,9 @@
   modulesPath,
   ...
 }: {
+  # DO NOT TOUCH!
+  system.stateVersion = "23.11"; # Did you read the comment? DO NOT TOUCH!
+  
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];

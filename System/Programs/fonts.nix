@@ -29,7 +29,6 @@ in {
       source-han-sans
       open-sans
       source-han-serif
-      meslo-lgs-nf
       roboto-mono
       roboto
       hack-font

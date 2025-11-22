@@ -7,9 +7,9 @@
   inherit (lib.types) anything attrsOf;
   inherit (lib.attrsets) mapAttrsToList;
 
-  cfg = config.home.uwsm;
+  cfg = config.uwsm;
 in {
-  options.home.uwsm = {
+  options.uwsm = {
     env = mkOption {
       type = attrsOf anything;
       description = "environment variables for uwsm";
@@ -18,7 +18,7 @@ in {
   };
 
   config = {
-    home.file.".config/uwsm/env".text = concatStringsSep "\n" (
+    files.".config/uwsm/env".text = concatStringsSep "\n" (
       mapAttrsToList (name: value: "export ${name}=${toString value}") cfg.env
     );
   };

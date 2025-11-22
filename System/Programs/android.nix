@@ -4,19 +4,15 @@
   lib,
   ...
 }: let
-  cfg = config.aquila.system.programs.kdeconnect;
+  cfg = config.aquila.system.programs.android;
 in {
   options.aquila.system.programs = {
-    kdeconnect = {
-      enable = lib.mkEnableOption "Enable kdeconnect For System";
+    android = {
+      enable = lib.mkEnableOption "Enable android utilities for the system";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    programs.kdeconnect = {
-      package = pkgs.kdePackages.kdeconnect-kde;
-      enable = true;
-    };
     environment.systemPackages = with pkgs; [
       scrcpy
       android-tools

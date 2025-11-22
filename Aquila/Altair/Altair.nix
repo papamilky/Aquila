@@ -33,7 +33,12 @@
     "dotnet-runtime-7.0.20"
     "olm-3.2.16"
   ];
+
   aquila.system = {
+    hardware = {
+      bluetooth.enable = true;
+      sound.enable = true;
+    };
     services = {
       solaar.enable = true;
       hyprland.enable = true;
@@ -46,6 +51,8 @@
       };
       podman-rootless.enable = true;
       navidrome.enable = true;
+      avahi.enable = true;
+      printing.enable = true;
     };
     programs = {
       gui.enable = true;

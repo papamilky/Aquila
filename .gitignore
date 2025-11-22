@@ -1,1 +1,3 @@
+.gitignore
 secret-key
+.sops.yaml

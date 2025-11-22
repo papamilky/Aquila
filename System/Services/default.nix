@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{lib, ...}: let
   dir = ./.;
   nixFiles = lib.filterAttrs (
     name: type:
@@ -13,7 +8,5 @@
       && name != "default.nix"
   ) (builtins.readDir dir);
 in {
-  imports =
-    map (name: dir + "/${name}") (builtins.attrNames nixFiles);
-  nixpkgs.config.allowUnfree = true;
+  imports = map (name: dir + "/${name}") (builtins.attrNames nixFiles);
 }

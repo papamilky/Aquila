@@ -9,6 +9,8 @@
       zellij
       kitty
 
+      zsh-powerlevel10k
+
       nh
       git-crypt
       sops

@@ -31,6 +31,9 @@ in {
         pulseaudio
         ddcutil
 
+        colloid-gtk-theme
+        colloid-icon-theme
+
         # Programs - Userspace
         satty
         gimp
@@ -91,7 +94,6 @@ in {
         idea
         clion
         inputs.mint.packages.${pkgs.stdenv.hostPlatform.system}.mint
-        inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default
       ];
   };
 }
